@@ -25,13 +25,13 @@ public class LoginDaoImpl implements LoginDao {
             connection = DriverManager.getConnection(DBUrl, user, password);
 
             //SQL语句
-            String sql = "select * from user_info where u_name=? and u_pwd=?";//其中 ? 是占位符
+            String sql = "select * from user_info where u_name=?";//其中 ? 是占位符
 
             //创建SQL命令对象
             prepStat = connection.prepareStatement(sql);
             //给占位符赋值
             prepStat.setString(1, u_name);
-            prepStat.setString(2, u_pwd);
+            //prepStat.setString(2, u_pwd);
 
             //执行SQL命令
             results = prepStat.executeQuery();
@@ -41,7 +41,13 @@ public class LoginDaoImpl implements LoginDao {
                 customer = new Customer();
                 customer.setU_id(results.getInt("u_id"));
                 customer.setU_name(results.getString("u_name"));
-                customer.setU_pwd(results.getString("u_pwd"));
+
+                //检查密码是否正确，即输入的密码与数据库中的密码是否一致
+                if (results.getString("u_pwd").equals(u_pwd)) {
+                    customer.setU_pwd(results.getString("u_pwd"));
+                } else {
+                    customer.setU_pwd(null);
+                }
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

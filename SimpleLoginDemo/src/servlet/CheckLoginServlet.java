@@ -30,9 +30,13 @@ public class CheckLoginServlet extends HttpServlet {
         System.out.println(customer);
 
         if (null != customer) {
-            resp.getWriter().write("登陆成功！");
+            if (null != customer.getU_pwd()) {
+                resp.getWriter().write("登陆成功！");
+            } else {
+                resp.getWriter().write("密码错误！");
+            }
         } else {
-            resp.getWriter().write("登陆失败！");
+            resp.getWriter().write("无此用户！");
         }
     }
 }
