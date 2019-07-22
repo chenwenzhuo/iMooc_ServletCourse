@@ -41,7 +41,8 @@ public class RegisterDaoImpl implements RegisterDao {
     }
 
     private void connectDB() {
-        String DBUrl = "jdbc:mysql://localhost:3306/login_db?serverTimezone=UTC&useSSL=false";
+        String DBUrl = "jdbc:mysql://localhost:3306/login_db?" +
+                "serverTimezone=Asia/Shanghai&useSSL=false&characterEncoding=utf8";
         String DBLogin_name = "root";
         String DBLogin_pwd = "960812";
 
