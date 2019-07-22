@@ -36,7 +36,8 @@ public class CheckLoginServlet extends HttpServlet {
                 resp.getWriter().write("密码错误！");
             }
         } else {
-            resp.getWriter().write("无此用户！");
+            //resp.getWriter().write("无此用户！");
+            resp.sendRedirect("RegisterServlet");//跳转到注册页面
         }
     }
 }
